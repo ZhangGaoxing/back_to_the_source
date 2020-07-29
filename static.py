@@ -1,10 +1,11 @@
+# -*- coding: UTF-8 -*-
+
 import updates as up
 
-def static(graph, d, sensors, infection_times, noise=0, tol_c=0, 
-        real_source=None, online=True):
+def static(graph, d, sensors, infection_times, noise=0, tol_c=0, real_source=None, online=True):
 
-    sorted_times, sorted_sensors = zip(*sorted(zip([infection_times[s] for s in
-            sensors], sensors)))
+    # 监视的感染顺序
+    sorted_times, sorted_sensors = zip(*sorted(zip([infection_times[s] for s in sensors], sensors)))
 
     min_time = sorted_times[0]
     max_time = max(infection_times.values())
@@ -19,9 +20,7 @@ def static(graph, d, sensors, infection_times, noise=0, tol_c=0,
     cand_sources = graph.nodes()
 
     if online:
-        cand_sources, stop = up.update_cand_sources(d, sorted_sensors[0],
-                min_time, {}, cand_sources, pres_time, 
-                sensors, noise=noise, tol_c=tol_c, online=online)
+        cand_sources, stop = up.update_cand_sources(d, sorted_sensors[0], min_time, {}, cand_sources, pres_time, sensors, noise=noise, tol_c=tol_c, online=online)
     else:
         pass 
 

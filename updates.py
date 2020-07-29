@@ -3,8 +3,7 @@ import utilities as ut
 def update_cand_sources(d, o, t_o, processed, cand_sources, pres_time,
         sensors, noise=0, tol_c=1.0, online=True):
    
-    cand_sources, stop = update_cand_set(d, processed, cand_sources, o, t_o, 
-            pres_time, sensors, noise=noise, tol_c=tol_c, online=online)
+    cand_sources, stop = update_cand_set(d, processed, cand_sources, o, t_o, pres_time, sensors, noise=noise, tol_c=tol_c, online=online)
     
     if len(cand_sources) > 0:
         # the algorithm continues
@@ -59,8 +58,15 @@ def update_algo_state(graph, seq_cand_sources, cand_sources, success, infected,
 
 def compatible_all(d, obs, times, neg_obs, neg_times, cand, c, t_c, pres_time, noise=0, tol_c=1):
     """ Select candidates sources that are compatible with c being infected at
-    time t_c
-    
+    d 节点的最短路径
+    obs 已经收到信息的监视
+    times 收到信息的时间
+    neg_obs 未收到信息的监视
+    neg_times 未收到信息的监视的时间
+    cand 候选源
+    c 最新的监视
+    t_c 最新的监视时间
+    pres_time 最新的监视时间
     """
     if t_c == None:
         for o, t in zip(obs, times):
